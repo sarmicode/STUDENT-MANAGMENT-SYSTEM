@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIT Student Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎓 Student Management System</h1>
+        <p class="subtitle">IT 2nd Year Batch-3 | Halida Institute of Technology</p>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('tab-attendance', this)">Attendance</button>
+            <button class="tab-btn" onclick="showTab('tab-routine', this)">Routine</button>
+            <button class="tab-btn" onclick="showTab('tab-students', this)">Students</button>
+            <button class="tab-btn" onclick="showTab('tab-history', this)">History</button>
+        </div>
+
+        <!-- TAB 1: ATTENDANCE -->
+        <div id="tab-attendance" class="tab active">
+            <div class="card">
+                <h3>Select Class</h3>
+                <label>Day:</label>
+                <select id="daySelect">
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                </select>
+
+                <label>Period:</label>
+                <select id="periodSelect">
+                    <option value="1">Period 1 (9:45-10:30)</option>
+                    <option value="2">Period 2 (10:30-11:15)</option>
+                    <option value="3">Period 3 (11:15-12:00)</option>
+                    <option value="4">Period 4 (12:15-13:00)</option>
+                    <option value="6">Period 6 (13:30-14:00)</option>
+                    <option value="7">Period 7 (14:00-14:45)</option>
+                    <option value="8">Period 8 (14:45-15:30)</option>
+                    <option value="9">Period 9 (15:30-16:15)</option>
+                    <option value="10">Period 10 (16:15-17:00)</option>
+                </select>
+
+                <button class="btn blue" onclick="loadClass()">📥 Load Class</button>
+            </div>
+
+            <div id="classInfo" class="card hidden">
+                <h2 id="subjectName"></h2>
+                <p id="timeInfo"></p>
+            </div>
+
+            <div id="attendanceBox" class="card hidden">
+                <div class="row">
+                    <button class="btn green" onclick="markAll(true)">✅ All Present</button>
+                    <button class="btn red" onclick="markAll(false)">❌ All Absent</button>
+                </div>
+                <ul id="studentList"></ul>
+                <button class="btn dark" onclick="saveAttendance()">💾 Save Attendance</button>
+            </div>
+        </div>
+
+        <!-- TAB 2: ROUTINE -->
+        <div id="tab-routine" class="tab">
+            <div class="card">
+                <h3>Add Subject to Routine</h3>
+                <select id="rDay">
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                </select>
+                <select id="rPeriod">
+                    <option value="1">Period 1</option>
+                    <option value="2">Period 2</option>
+                    <option value="3">Period 3</option>
+                    <option value="4">Period 4</option>
+                    <option value="6">Period 6</option>
+                    <option value="7">Period 7</option>
+                    <option value="8">Period 8</option>
+                    <option value="9">Period 9</option>
+                    <option value="10">Period 10</option>
+                </select>
+                <input type="text" id="rSubject" placeholder="Subject Name (e.g. PCC-IT 391)">
+                <button class="btn blue" onclick="addRoutine()">💾 Save to Routine</button>
+            </div>
+
+            <div class="card">
+                <h3>Current Routine</h3>
+                <div id="routineList"></div>
+            </div>
+        </div>
+
+        <!-- TAB 3: STUDENTS -->
+        <div id="tab-students" class="tab">
+            <div class="card">
+                <h3 id="formTitle">➕ Add New Student</h3>
+                <input type="text" id="sName" placeholder="Full Name *">
+                <input type="text" id="sRoll" placeholder="Roll Number *">
+                <input type="text" id="sEmail" placeholder="Email (optional)">
+                <input type="text" id="sPhone" placeholder="Phone (optional)">
+                <input type="text" id="sAddress" placeholder="Address (optional)">
+                <button class="btn blue" id="saveStudentBtn" onclick="saveStudent()">Add Student</button>
+                <button class="btn red hidden" id="cancelEditBtn" onclick="cancelEdit()">Cancel Edit</button>
+            </div>
+
+            <div class="card">
+                <h3>Total Students: <span id="studentCount">0</span></h3>
+                <button class="btn blue" onclick="renderStudents()">🔄 Refresh List</button>
+                <div id="masterList"></div>
+            </div>
+        </div>
+
+        <!-- TAB 4: HISTORY -->
+        <div id="tab-history" class="tab">
+            <div class="card">
+                <h3>📋 Saved Attendance Records</h3>
+                <button class="btn blue" onclick="loadHistory()">🔄 Load All Records</button>
+                <button class="btn red" onclick="clearAllHistory()">🗑️ Clear All History</button>
+                <div id="historyBox"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
